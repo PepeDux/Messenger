@@ -1,0 +1,24 @@
+﻿<Page x:Class="Messenger.CreateChat"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Messenger"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="400"
+      Title="CreateChat">
+
+    <Grid>
+        <TextBox x:Name="CreateChatLogin" Margin="40,160,40,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Button x:Name="Create" Content="Create" Margin="40,370,40,0" VerticalAlignment="Top" Height="40" Click="CreateChatButton_Click"/>
+        <Button x:Name ="OpenCreateChat" Content="Or create a new chat?" HorizontalAlignment="Left" Margin="40,410,0,0" VerticalAlignment="Top" Background="Transparent" FontSize="12" Height="24" Foreground="#FFC54244" FontWeight="Normal" FontStretch="Expanded" Click="OpenCreateChat_Click"/>
+        <PasswordBox x:Name="CreateChatPassword" Margin="40,230,40,0" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="CreateChatPasswaordProof" Margin="40,300,40,0" VerticalAlignment="Top"/>
+        <Label Content="Chat name" HorizontalAlignment="Left" Margin="35,130,0,0" VerticalAlignment="Top"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="35,200,0,0" VerticalAlignment="Top"/>
+        <Label Content="Password confirm" HorizontalAlignment="Left" Margin="35,270,0,0" VerticalAlignment="Top"/>
+
+        <Label Content="Сreate an chat!" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32" Foreground="#FFEAEAEA"/>
+        <Label Content="ViNik Developer Studio" HorizontalAlignment="Center" Margin="0,460,0,0" VerticalAlignment="Top" FontFamily="Dubai" FontSize="12" Foreground="#FF6E6873" FontWeight="Bold"/>
+    </Grid>
+</Page>

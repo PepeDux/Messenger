@@ -1,0 +1,25 @@
+﻿<Page x:Class="Messenger.SignIn"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Messenger"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="400"
+      Title="SignIn">
+
+    <Grid>
+        <TextBox x:Name="LoginSignIn" Margin="40,160,40,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35"  TextAlignment="Justify" Foreground="#FFEAEAEA" FontSize="16" SelectionBrush="#FFEA8913" Background="#FF27232A" BorderBrush="{x:Null}" FontFamily="Dubai" VerticalContentAlignment="Center" FontWeight="Bold"/>
+        <Button x:Name="UserSignIn" Content="Sign In" Margin="40,300,40,0" VerticalAlignment="Top" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="SignIn_Click" FontSize="20" FontWeight="Bold" BorderBrush="{x:Null}" Background="#FFE3474A" Foreground="#FFEAFBFF" FontFamily="Dubai"/>
+        <Button x:Name ="OpenSignUp" Content="Or create a new account?" HorizontalAlignment="Left" Margin="40,340,0,0" VerticalAlignment="Top" Background="Transparent" FontSize="12" Height="24" Foreground="#FFC54244" FontWeight="Normal" FontStretch="Expanded" Click="OpenSignUp_Click"/>
+        <PasswordBox x:Name="PasswordSignIn" VerticalAlignment="Top" Height="35" Margin="40,230,40,0" VerticalContentAlignment="Center" Background="#FF27232A" BorderBrush="{x:Null}" SelectionTextBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="#FFEAEAEA" FontSize="16" FontFamily="Dubai" FontWeight="Bold"/>
+
+
+
+
+        <Label Content="WELCOME" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Height="60" Width="320" Foreground="#FFEAEAEA" FontSize="36" FontWeight="Bold" FontFamily="Dubai" HorizontalContentAlignment="Center"/>
+        <Label Content="Login" Width="80" Height="34" HorizontalAlignment="Left" Margin="37,130,0,0" VerticalAlignment="Top"/>
+        <Label Content="Password" Width="80" Height="35" HorizontalAlignment="Left" Margin="37,200,0,0" VerticalAlignment="Top"/>
+        <Label Content="ViNik Developer Studio" HorizontalAlignment="Center" Margin="0,460,0,0" VerticalAlignment="Top" FontFamily="Dubai" FontSize="12" Foreground="#FF6E6873" FontWeight="Bold"/>
+    </Grid>
+</Page>
