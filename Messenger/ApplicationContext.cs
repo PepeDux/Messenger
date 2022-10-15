@@ -20,7 +20,7 @@ namespace Messenger
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP\SQLSERVER;Database=En-DecoderBD;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP\SQLSERVER;Database=Messenger;Trusted_Connection=True;");
         }
     }
 }

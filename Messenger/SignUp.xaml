@@ -9,15 +9,15 @@
       Title="SignUpPage">
 
     <Grid>
-        <TextBox x:Name="LoginSignUp" Margin="40,100,40,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox x:Name="NicknameSignUp" Margin="40,170,40,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <PasswordBox x:Name="PasswordSignUp" Margin="40,240,40,0" VerticalAlignment="Top"/>
-        <PasswordBox x:Name="PasswordProofSignUp" Margin="40,310,40,0" VerticalAlignment="Top"/>
-        <Button x:Name="Sign" Content="Sign Up" Margin="40,380,40,0" Height="40" VerticalAlignment="Top"/>
-        <Label Content="Nickname" HorizontalAlignment="Left" Margin="35,140,0,0" VerticalAlignment="Top"/>
-        <Label Content="Password" HorizontalAlignment="Left" Margin="35,210,0,0" VerticalAlignment="Top"/>
-        <Label Content="Password confirm" HorizontalAlignment="Left" Margin="35,280,0,0" VerticalAlignment="Top"/>
-        <Label Content="Login" HorizontalAlignment="Left" Margin="35,70,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="LoginSignUp" Margin="40,100,40,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" />
+        <TextBox x:Name="NicknameSignUp" Margin="40,170,40,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" />
+        <PasswordBox x:Name="PasswordSignUp" Margin="40,240,40,0" VerticalAlignment="Top" VerticalContentAlignment="Center" />
+        <PasswordBox x:Name="PasswordProofSignUp" Margin="40,310,40,0" VerticalAlignment="Top" VerticalContentAlignment="Center" />
+        <Button x:Name="Sign" Content="Sign Up" Margin="40,380,40,0" Height="40" VerticalAlignment="Top" Click="Sign_Click"/>
+        <Label x:Name="Nickname" Content="Nickname" Margin="35,140,35,0" VerticalAlignment="Top"/>
+        <Label x:Name="Password" Content="Password" Margin="35,210,35,0" VerticalAlignment="Top"/>
+        <Label x:Name="Passwordconfirm" Content="Password confirm" Margin="35,280,35,0" VerticalAlignment="Top"/>
+        <Label x:Name="Login" Content="Login" Margin="35,70,35,0" VerticalAlignment="Top"/>
 
         <Button Content="Or already have an account?" HorizontalAlignment="Left" Margin="40,420,0,0" VerticalAlignment="Top" Background="Transparent" FontSize="12" Height="24" Foreground="#FFC54244" FontWeight="Normal" FontStretch="Expanded" Click="Button_Click"/>
         <Label Content="Сreate an account!" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32" Foreground="#FFEAEAEA"/>

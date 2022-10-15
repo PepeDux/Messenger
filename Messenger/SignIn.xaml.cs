@@ -40,6 +40,20 @@ namespace Messenger
 
                         LoginSignIn.Text = null;            //Очищаем поля авторизации
                         PasswordSignIn.Password = null;     //   
+
+                        MainMenu mainMenu = new MainMenu();
+                        mainMenu.Show();
+                        Application.Current.MainWindow.Close();
+                    }
+                    else
+                    {
+                        Password.Content = "PASSWORD - wrong username or password";
+                        Password.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
+
+                        Login.Content = "LOGIN - wrong username or password";
+                        Login.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
+
+                        PasswordSignIn.Password = null;//Очищаем поля авторизации
                     }
                 }
             }

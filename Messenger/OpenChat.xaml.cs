@@ -39,6 +39,20 @@ namespace Messenger
 
                         OpenChatLogin.Text = null;        //Очищаем значения полей
                         OpenChatPassword.Password = null; //
+
+                        MainMenu mainMenu = new MainMenu();
+                        mainMenu.Show();
+                        Application.Current.MainWindow.Close();
+                    }
+                    else
+                    {
+                        Password.Content = "PASSWORD - wrong username or password";
+                        Password.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
+
+                        Chat.Content = "LOGIN - wrong username or password";
+                        Chat.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
+
+                        OpenChatPassword.Password = null;//Очищаем поля авторизации
                     }
                 }
             }
