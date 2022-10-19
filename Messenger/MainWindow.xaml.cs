@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
-
+using System.Net;
 
 namespace Messenger
 {
@@ -22,12 +22,31 @@ namespace Messenger
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static string host = Dns.GetHostName();
+        public static IPAddress[] address = Dns.GetHostAddresses(host);
         public MainWindow()
         {
             
         }
         private void UserFrame_Initialized(object sender, EventArgs e)
         {
+            using (var db = new ApplicationContext())
+            {
+                var users = db.Users.ToList();
+
+                foreach (Users u in users)
+                {
+                    if (address[4].ToString() == u.IP)
+                    {
+                        DataBank.UserLog = u.Nickname;      //Указываем программе авторизированного пользователя                       
+
+                        MainMenu mainMenu = new MainMenu();
+                        mainMenu.Show();
+                        Application.Current.MainWindow.Close();
+                    }
+                }              
+            }
+
             UserFrame.Navigate(new SignIn());
         }
     }

@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Messenger"
         mc:Ignorable="d"
-        Title="MainMenu" Height="500" Width="800"  AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+        Title="MainMenu" Height="500" Width="800"  AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="#FF332F35" Initialized="Window_Initialized">
     <Window.Template>
         <ControlTemplate TargetType="Window">
-            <Border Name="newBorder" CornerRadius="5" Background="#FF332F35">
+            <Border Name="newBorder" CornerRadius="5" Background="#332F35">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -30,7 +30,16 @@
             </Border>
         </ControlTemplate>
     </Window.Template>
-    <Grid>
-        <Frame x:Name="UserFrame"  NavigationUIVisibility="Hidden" Margin="200,0,0,0"/>
+    <Grid Background="#1F1C23">
+        <Frame x:Name="UserFrame"  NavigationUIVisibility="Hidden" Margin="200,0,0,0" Background="#FF332F35"/>
+        <Button Content="Add chat" Width="85" Height="40" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="Settings" Width="85" Height="40" HorizontalAlignment="Left" Margin="105,60,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="Name" Content="USER NAME" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="180"/>
+        <Label Content="Begin your communication!" FontSize="16" HorizontalAlignment="Left" Margin="402,0,0,0" VerticalAlignment="Center"/>
+        <Rectangle HorizontalAlignment="Left" Height="4" Margin="0,110,0,0" Stroke="#FF332F35" VerticalAlignment="Top" Width="200" Fill="#FF332F35"/>
+        <Rectangle HorizontalAlignment="Left" Height="4" Margin="0,466,0,0" Stroke="#FF332F35" VerticalAlignment="Top" Width="200" Fill="#FF332F35"/>
+        <Label Content="ViNik Developer Studio" HorizontalAlignment="Left" Margin="35,470,0,0" VerticalAlignment="Top" FontFamily="Dubai" FontSize="12" Foreground="#FF6E6873" FontWeight="Bold"/>
     </Grid>
+
+
 </Window>

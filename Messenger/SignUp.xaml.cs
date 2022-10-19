@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net;
 
 namespace Messenger
 {
@@ -29,6 +30,10 @@ namespace Messenger
         int LevelID2 = 8; //Уровни ID
         int LevelID3 = 8; //
         int LevelID4 = 8; //
+
+        public static string host = Dns.GetHostName();
+        public static IPAddress[] address = Dns.GetHostAddresses(host);
+       
 
         bool succsess = true;
 
@@ -59,6 +64,32 @@ namespace Messenger
 
             else
             {
+                
+
+                if (NicknameSignUp.Text.Length < 1)
+                {
+                    NicknameSignUp.Text = null;
+                    Nickname.Content = "NICKNAME - field cannot be empty";
+                    Nickname.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
+                    succsess = false;
+                }
+
+                /////////////////////////////////////////////////////////////////////////////////////////
+
+                if (LoginSignUp.Text.Length < 8 || LoginSignUp.Text.Length > 24)
+                {
+                    Login.Content = "LOGIN - less than 8 more or than 24";
+                    Login.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
+                    succsess = false;
+                }
+
+                if (NicknameSignUp.Text.Length > 16)
+                {
+                    Nickname.Content = "NICKNAME - no more than 12";
+                    Nickname.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
+                    succsess = false;
+                }
+
                 using (var db = new ApplicationContext())
                 {
                     var users = db.Users.ToList();
@@ -77,42 +108,18 @@ namespace Messenger
                         if (NicknameSignUp.Text == u.Nickname)
                         {
                             NicknameSignUp.Text = null;
-                            Nickname.Content = "LOGIN - this nickname already exists";
+                            Nickname.Content = "NICKNAME - this nickname already exists";
                             Nickname.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
                             succsess = false;
                             break;
                         }
-                    }              
-                }
-
-                if (NicknameSignUp.Text.Length < 1)
-                {
-                    NicknameSignUp.Text = null;
-                    Nickname.Content = "NICKNAME - field cannot be empty";
-                    Nickname.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
-                    succsess = false;
-                }
-
-                /////////////////////////////////////////////////////////////////////////////////////////
-
-                if (LoginSignUp.Text.Length < 8 || LoginSignUp.Text.Length > 24)
-                {
-                    Login.Content = "LOGIN - less than 8 more than 24";
-                    Login.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
-                    succsess = false;
-                }
-
-                if (NicknameSignUp.Text.Length > 16)
-                {
-                    Nickname.Content = "NICKNAME - no more than 12";
-                    Nickname.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
-                    succsess = false;
+                    }
                 }
 
                 if (PasswordSignUp.Password.Length < 8 || PasswordSignUp.Password.Length > 24)
                 {
                     PasswordSignUp.Password = null;
-                    Password.Content = "PASSWORD - less than 8 more than 24";
+                    Password.Content = "PASSWORD - less than 8 or more than 24";
                     Password.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
                     succsess = false;
                 }
@@ -120,7 +127,7 @@ namespace Messenger
                 if (PasswordProofSignUp.Password.Length < 8 || PasswordSignUp.Password.Length > 24)
                 {
                     PasswordProofSignUp.Password = null;
-                    Passwordconfirm.Content = "PASSWORD CONFIRM - less than 8 more than 24";
+                    Passwordconfirm.Content = "PASSWORD CONFIRM - less than 8 or more than 24";
                     Passwordconfirm.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
                     succsess = false;
                 }
@@ -158,7 +165,7 @@ namespace Messenger
                             UserID = UserID + random.Next(0, 10); // 4 уровень ID
                         }
 
-                        Users user = new Users { ID = UserID, Nickname = NicknameSignUp.Text, Login = LoginSignUp.Text, Password = PasswordSignUp.Password }; // Присваиваем значения к новому пользователю
+                        Users user = new Users { ID = UserID, Nickname = NicknameSignUp.Text, Login = LoginSignUp.Text, Password = PasswordSignUp.Password, IP = address[4].ToString()}; // Присваиваем значения к новому пользователю
 
                         db.Users.Add(user); //Добавляем нового пользователя
                         db.SaveChanges(); //Сохраняем измения в базе данных
@@ -174,7 +181,9 @@ namespace Messenger
 
                     }
                 }
-                               
+
+                succsess = true;
+
             }
         }
     }

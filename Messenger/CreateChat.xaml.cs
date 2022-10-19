@@ -74,17 +74,11 @@ namespace Messenger
                         }
                     }
 
-                    if (CreateChatName.Text.Length < 1)
-                    {
-                        CreateChatName.Text = null;
-                        Chatname.Content = "CHAT NAME - field cannot be empty";
-                        Chatname.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
-                        succsess = false;
-                    }
+                    
 
-                    if (CreateChatName.Text.Length > 16)
+                    if (CreateChatName.Text.Length > 24 || CreateChatName.Text.Length < 8)
                     {
-                        Chatname.Content = "NICKNAME - no more than 12";
+                        Chatname.Content = "CHATNAME - less than 8 or more than 24";
                         Chatname.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
                         succsess = false;
                     }
@@ -92,7 +86,7 @@ namespace Messenger
                     if (CreateChatPassword.Password.Length < 8 || CreateChatPassword.Password.Length > 24)
                     {
                         CreateChatPassword.Password = null;
-                        Password.Content = "PASSWORD - less than 8 more than 24";
+                        Password.Content = "PASSWORD - less than 8 or more than 24";
                         Password.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
                         succsess = false;
                     }
@@ -100,14 +94,11 @@ namespace Messenger
                     if (CreateChatPasswaordProof.Password.Length < 8 || CreateChatPasswaordProof.Password.Length > 24)
                     {
                         CreateChatPasswaordProof.Password = null;
-                        Passwordconfirm.Content = "PASSWORD CONFIRM - less than 8 more than 24";
+                        Passwordconfirm.Content = "PASSWORD CONFIRM - less than 8 or more than 24";
                         Passwordconfirm.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
                         succsess = false;
                     }
 
-                    MainMenu mainMenu = new MainMenu();
-                    mainMenu.Show();
-                    Application.Current.MainWindow.Close();
                 }
                 if (succsess == true)
                 {
@@ -130,9 +121,13 @@ namespace Messenger
                         CreateChatPassword.Password = null;
                         CreateChatPasswaordProof.Password = null;
                         CreateChatName.Text = null;
+
+                        MainMenu mainMenu = new MainMenu();
+                        mainMenu.Show();
+                        Application.Current.MainWindow.Close();
                     }
                 }
-                   
+                succsess = true;
             }
         }
 

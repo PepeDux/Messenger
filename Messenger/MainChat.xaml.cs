@@ -10,31 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Messenger
 {
     /// <summary>
-    /// Логика взаимодействия для MainMenu.xaml
+    /// Логика взаимодействия для MainChat.xaml
     /// </summary>
-    public partial class MainMenu : Window
+    public partial class MainChat : Window
     {
-        public MainMenu()
+        public MainChat()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Grid_Initialized(object sender, EventArgs e)
         {
-            MainChat mainChat = new MainChat();
-            mainChat.Show();
-            this.Close();
-        }
-
-        private void Window_Initialized(object sender, EventArgs e)
-        {
-            Name.Content = DataBank.UserLog;
+            ChatFrame.Navigate(new OpenChat());
         }
     }
 }

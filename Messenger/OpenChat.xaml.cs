@@ -24,8 +24,14 @@ namespace Messenger
         {
             InitializeComponent();
         }
+        
+        private void OpenCreateChat_Click(object sender, RoutedEventArgs e)
+        {
 
-        private void OpenChatButton_Click(object sender, RoutedEventArgs e)
+            NavigationService.Navigate(new CreateChat());
+        }
+
+        private void ChatOpen_Click(object sender, RoutedEventArgs e)
         {
             using (var db = new ApplicationContext())
             {
@@ -44,24 +50,16 @@ namespace Messenger
                         mainMenu.Show();
                         Application.Current.MainWindow.Close();
                     }
-                    else
-                    {
-                        Password.Content = "PASSWORD - wrong username or password";
-                        Password.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
 
-                        Chat.Content = "LOGIN - wrong username or password";
-                        Chat.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
-
-                        OpenChatPassword.Password = null;//Очищаем поля авторизации
-                    }
                 }
+                Password.Content = "PASSWORD - wrong chat name or password";
+                Password.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
+
+                Chat.Content = "CHAT NAME - wrong chat name or password";
+                Chat.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
+
+                OpenChatPassword.Password = null;//Очищаем поля авторизации
             }
-
-        }
-        private void OpenCreateChat_Click(object sender, RoutedEventArgs e)
-        {
-
-            NavigationService.Navigate(new CreateChat());
         }
     }
 }

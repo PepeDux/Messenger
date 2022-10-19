@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +21,8 @@ namespace Messenger
     /// </summary>
     public partial class SignIn : Page
     {
+        public static string host = Dns.GetHostName();
+        public static IPAddress[] address = Dns.GetHostAddresses(host);
         public SignIn()
         {
             InitializeComponent();
@@ -38,6 +41,11 @@ namespace Messenger
                     {
                         DataBank.UserLog = u.Nickname;      //Указываем программе авторизированного пользователя
 
+                        Users u1 = db.Users.FirstOrDefault();
+
+                        u1.IP = address[4].ToString();
+                        db.SaveChanges();   // сохраняем изменения
+
                         LoginSignIn.Text = null;            //Очищаем поля авторизации
                         PasswordSignIn.Password = null;     //   
 
@@ -45,17 +53,15 @@ namespace Messenger
                         mainMenu.Show();
                         Application.Current.MainWindow.Close();
                     }
-                    else
-                    {
-                        Password.Content = "PASSWORD - wrong username or password";
-                        Password.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
-
-                        Login.Content = "LOGIN - wrong username or password";
-                        Login.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
-
-                        PasswordSignIn.Password = null;//Очищаем поля авторизации
-                    }
                 }
+
+                Password.Content = "PASSWORD - wrong username or password";
+                Password.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
+
+                Login.Content = "LOGIN - wrong username or password";
+                Login.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
+
+                PasswordSignIn.Password = null;//Очищаем поля авторизации
             }
         }
 
