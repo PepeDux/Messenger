@@ -61,5 +61,12 @@ namespace Messenger
                 OpenChatPassword.Password = null;//Очищаем поля авторизации
             }
         }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.Show();
+            Application.Current.MainWindow.Close();
+        }
     }
 }

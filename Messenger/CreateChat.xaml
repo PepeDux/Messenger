@@ -17,6 +17,7 @@
         <Label x:Name="Chatname" Content="Chat name" HorizontalAlignment="Left" Margin="35,130,0,0" VerticalAlignment="Top"/>
         <Label x:Name="Password" Content="Password" HorizontalAlignment="Left" Margin="35,200,0,0" VerticalAlignment="Top"/>
         <Label x:Name="Passwordconfirm" Content="Password confirm" HorizontalAlignment="Left" Margin="35,270,0,0" VerticalAlignment="Top"/>
+        <Button x:Name ="Back" Content="🠔" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Background="Transparent" FontSize="30" Height="43" Foreground="#FFC54244" FontWeight="Normal" FontStretch="Expanded" Width="25" Click="Back_Click"/>
 
         <Label Content="Сreate an chat!" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32" Foreground="#FFEAEAEA"/>
         <Label Content="ViNik Developer Studio" HorizontalAlignment="Center" Margin="0,460,0,0" VerticalAlignment="Top" FontFamily="Dubai" FontSize="12" Foreground="#FF6E6873" FontWeight="Bold"/>

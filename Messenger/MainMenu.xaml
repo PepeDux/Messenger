@@ -33,7 +33,7 @@
     <Grid Background="#1F1C23">
         <Frame x:Name="UserFrame"  NavigationUIVisibility="Hidden" Margin="200,0,0,0" Background="#FF332F35"/>
         <Button Content="Add chat" Width="85" Height="40" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <Button Content="Settings" Width="85" Height="40" HorizontalAlignment="Left" Margin="105,60,0,0" VerticalAlignment="Top"/>
+        <Button Content="Settings" Width="85" Height="40" HorizontalAlignment="Left" Margin="105,60,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
         <Label x:Name="Name" Content="USER NAME" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="180"/>
         <Label Content="Begin your communication!" FontSize="16" HorizontalAlignment="Left" Margin="402,0,0,0" VerticalAlignment="Center"/>
         <Rectangle HorizontalAlignment="Left" Height="4" Margin="0,110,0,0" Stroke="#FF332F35" VerticalAlignment="Top" Width="200" Fill="#FF332F35"/>

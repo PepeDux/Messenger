@@ -1,0 +1,21 @@
+﻿<Page x:Class="Messenger.ChangeNickname"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Messenger"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="400"
+      Title="ChangeNickname">
+
+    <Grid>
+        <Button x:Name="Change" Content="Change" Margin="40,370,40,0" VerticalAlignment="Top" Height="40" Click="Change_Click" />
+        <Button x:Name ="Back" Content="🠔" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Background="Transparent" FontSize="30" Height="43" Foreground="#FFC54244" FontWeight="Normal" FontStretch="Expanded" Width="25" Click="Back_Click"/>
+
+        <TextBox x:Name="NewNickname" Margin="40,270,40,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" />
+        <Label x:Name="Name" Content="New nickname" Margin="35,240,35,0" VerticalAlignment="Top"/>
+
+        <Label Content="Change nickname" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32" Foreground="#FFEAEAEA"/>
+        <Label Content="ViNik Developer Studio" HorizontalAlignment="Center" Margin="0,460,0,0" VerticalAlignment="Top" FontFamily="Dubai" FontSize="12" Foreground="#FF6E6873" FontWeight="Bold"/>
+    </Grid>
+</Page>

@@ -36,5 +36,12 @@ namespace Messenger
         {
             Name.Content = DataBank.UserLog;
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            SettingsMenu settingsMenu = new SettingsMenu();
+            settingsMenu.Show();
+            this.Close();
+        }
     }
 }
