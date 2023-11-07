@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Messenger
+namespace Messenger.DB
 {
     internal class ApplicationContext : DbContext
     {

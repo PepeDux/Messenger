@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Net;
+using Messenger.DB;
 
 namespace Messenger
 {
