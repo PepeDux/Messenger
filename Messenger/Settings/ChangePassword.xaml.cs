@@ -29,6 +29,10 @@ namespace Messenger
 
         private void Change_Click(object sender, RoutedEventArgs e)
         {
+            // Сброс переменной succsess в начале метода
+            succsess = true;
+
+            // Проверка длины нового пароля
             if (NewPassword.Password.Length < 8 || NewPassword.Password.Length > 24)
             {
                 NewPassword.Password = null;
@@ -37,6 +41,7 @@ namespace Messenger
                 succsess = false;
             }
 
+            // Проверка длины подтверждения нового пароля
             if (NewPasswordProof.Password.Length < 8 || NewPasswordProof.Password.Length > 24)
             {
                 NewPasswordProof.Password = null;
@@ -45,6 +50,7 @@ namespace Messenger
                 succsess = false;
             }
 
+            // Проверка совпадения нового пароля и его подтверждения
             if (NewPassword.Password != NewPasswordProof.Password)
             {
                 PassConfirm.Content = "PASSWORD CONFIRM - Passwords do not match";
@@ -53,19 +59,20 @@ namespace Messenger
                 Pass.Content = "PASSWORD - Passwords do not match";
                 Pass.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
 
-                NewPassword.Password = null;         //Очищаем поля паролей
-                NewPasswordProof.Password = null;    //
+                NewPassword.Password = null;
+                NewPasswordProof.Password = null;
 
                 succsess = false;
-            }//Проверка совпадения пароля в 2-ух полях
+            }
 
+            // Проверка старого пароля
             using (var db = new ApplicationContext())
             {
-                var users = db.Users.ToList();
+                var user = db.Users.FirstOrDefault(u => DataBank.UserLog == u.Nickname);
 
-                foreach (Users u in users)
+                if (user != null)
                 {
-                    if(DataBank.UserLog == u.Nickname && OldPassword.Password != u.Password)
+                    if (OldPassword.Password != user.Password)
                     {
                         OldPass.Content = "OLD PASSWORD - Invalid password";
                         OldPass.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
@@ -75,20 +82,22 @@ namespace Messenger
                         succsess = false;
                     }
                 }
+                else
+                {
+                    succsess = false;
+                }
             }
 
-            using (var db = new ApplicationContext())
+            // Если все проверки пройдены успешно, обновляем пароль
+            if (succsess)
             {
-                var users = db.Users.ToList();
-
-                foreach (Users u in users)
+                using (var db = new ApplicationContext())
                 {
-                    if (OldPassword.Password == u.Password && DataBank.UserLog == u.Nickname && succsess == true)
+                    var user = db.Users.FirstOrDefault(u => DataBank.UserLog == u.Nickname);
+
+                    if (user != null)
                     {
-
-                        Users u1 = db.Users.FirstOrDefault();
-
-                        u1.Password = NewPassword.Password;
+                        user.Password = NewPassword.Password;
                         db.SaveChanges();   // сохраняем изменения
 
                         NavigationService.Navigate(new Settings());

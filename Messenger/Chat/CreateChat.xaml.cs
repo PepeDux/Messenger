@@ -23,22 +23,9 @@ namespace Messenger
     public partial class CreateChat : Page
     {
         int LenghtSymbol = 16;
-
         Random random = new Random();
-
-        string LibraryID = null;
-        //string LibraryIDKey = null;
-        //string LibraryIDStrength = null;        
-
-        string Code = null;
-
-        string Buf = null;
-        int LibraryLenghtLevel1 = 8;
-        //int LibraryLenghtLevel2 = 8;
-        //int LibraryLenghtLevel3 = 8;
-
         string RoomID = null;
-        bool succsess = true;
+
         public CreateChat()
         {
             InitializeComponent();
@@ -46,39 +33,22 @@ namespace Messenger
 
         private void OpenCreateChat_Click(object sender, RoutedEventArgs e)
         {
-
             NavigationService.Navigate(new OpenChat());
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.Show();
-            Application.Current.MainWindow.Close();
+            Window.GetWindow(this).Close(); // Закрыть текущее окно
         }
 
         private void CreateChatButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var db = new ApplicationContext())
-            {
-                var users = db.Users.ToList();
+            bool succsess = true; // Сбрасываем флаг успешности перед каждой попыткой
 
-                foreach (Users u in users)
-                {
-                    if (CreateChatName.Text == u.Login)
-                    {
-                        CreateChatName.Text = null;
-                        Chatname.Content = "CHAT NAME - this chat name already exists";
-                        Chatname.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
-                        succsess = false;
-                        break;
-                    }
-                }     
-            }            
-
-            if (CreateChatName.Text.Length > 24 || CreateChatName.Text.Length < 8)
+            if (IsChatNameTaken(CreateChatName.Text))
             {
-                Chatname.Content = "CHAT NAME - less than 8 or more than 24";
+                CreateChatName.Text = null;
+                Chatname.Content = "CHAT NAME - this chat name already exists";
                 Chatname.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
                 succsess = false;
             }
@@ -107,39 +77,64 @@ namespace Messenger
                 Password.Content = "PASSWORD - Passwords do not match";
                 Password.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
 
-                CreateChatPassword = null;
-                CreateChatPasswaordProof = null;
+                CreateChatPassword.Password = null;
+                CreateChatPasswaordProof.Password = null;
 
                 succsess = false;
             }
 
-            if (succsess == true)
+            if (succsess)
             {
-                using (var db = new ApplicationContext())
+                CreateNewChatRoom();
+                ResetForm();
+                Window.GetWindow(this).Close();
+            }
+        }
+
+        private bool IsChatNameTaken(string chatName)
+        {
+            using (var db = new ApplicationContext())
+            {
+                return db.ChatRooms.Any(c => c.Login == chatName);
+            }
+        }
+
+        private void CreateNewChatRoom()
+        {
+            using (var db = new ApplicationContext())
+            {
+                RoomID = GenerateRoomID();
+
+                ChatRooms chatRoom = new ChatRooms
                 {
-                    for (int i = 0; i < 8; i++)
-                    {
-                        RoomID = RoomID + random.Next(0, 10);
-                    }
+                    RoomID = RoomID,
+                    Login = CreateChatName.Text,
+                    Password = CreateChatPassword.Password
+                };
 
-                    ChatRooms chatRoom = new ChatRooms { RoomID = RoomID, Login = CreateChatName.Text, Password = CreateChatPassword.Password };
+                db.ChatRooms.Add(chatRoom);
+                db.SaveChanges();
 
-                    db.ChatRooms.Add(chatRoom);
-                    db.SaveChanges();
-
-                    RoomID = null;
-                    Code = null;
-                    LibraryID = null;
-
-                    CreateChatPassword.Password = null;
-                    CreateChatPasswaordProof.Password = null;
-                    CreateChatName.Text = null;
-
-                    MainMenu mainMenu = new MainMenu();
-                    mainMenu.Show();
-                    Application.Current.MainWindow.Close();
+                // Обновляем список чатов в главном меню
+                var mainMenu = Application.Current.Windows.OfType<MainMenu>().FirstOrDefault();
+                if (mainMenu != null)
+                {
+                    mainMenu.UpdateChatList(chatRoom.RoomID);
                 }
             }
-        }       
+        }
+
+        private string GenerateRoomID()
+        {
+            return string.Concat(Enumerable.Range(0, 8).Select(_ => random.Next(0, 10).ToString()));
+        }
+
+        private void ResetForm()
+        {
+            RoomID = null;
+            CreateChatPassword.Password = null;
+            CreateChatPasswaordProof.Password = null;
+            CreateChatName.Text = null;
+        }
     }
 }

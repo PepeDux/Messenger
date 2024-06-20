@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Messenger"
+        Loaded="Window_Loaded"
         mc:Ignorable="d"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Title="SignIn" Height="500" Width="400"  AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
 
     <Window.Template>
@@ -34,7 +36,9 @@
 
 
     <Grid HorizontalAlignment="Right" Width="400">
-        <Frame x:Name="UserFrame"  NavigationUIVisibility="Hidden" Initialized="UserFrame_Initialized"/>
-        
+        <Frame x:Name="UserFrame" NavigationUIVisibility="Hidden" />
+        <Button Content="✖" Margin="369,0,0,0" VerticalAlignment="Top" Background="{x:Null}" Height="37" Click="Button_Click_2" HorizontalAlignment="Left" Width="31"/>
+        <Button Content="➖" HorizontalAlignment="Left" Margin="338,0,0,0" VerticalAlignment="Top" Background="{x:Null}" Height="37" Width="31" Click="Button_Click_3"/>
+
     </Grid>
 </Window>

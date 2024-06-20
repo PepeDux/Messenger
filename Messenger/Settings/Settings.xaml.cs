@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace Messenger
     /// </summary>
     public partial class Settings : Page
     {
+        private AuthService authService = new AuthService();
+
         public Settings()
         {
             InitializeComponent();
@@ -29,26 +32,30 @@ namespace Messenger
         {
             using (var db = new ApplicationContext())
             {
-                var users = db.Users.ToList();
+                var user = db.Users.FirstOrDefault(u => u.Nickname == DataBank.UserLog);
 
-                foreach (Users u in users)
+                if (user != null)
                 {
-                    if (DataBank.UserLog == u.Nickname)
-                    {
-                        DataBank.UserLog = null;      //Указываем программе авторизированного пользователя
+                    DataBank.UserLog = null;
 
-                        Users u1 = db.Users.FirstOrDefault();
+                    user.IP = null;
+                    db.SaveChanges();
 
-                        u1.IP = null;
-                        db.SaveChanges();   // сохраняем изменения
+                    // Получаем путь к текущему исполняемому файлу
+                    string applicationPath = Process.GetCurrentProcess().MainModule.FileName;
 
-                        MainWindow mainWindow = new MainWindow();
-                        mainWindow.Show();
-                        App.Current.Shutdown();
-                    }
+                    // Запускаем новое экземпляр текущего приложения
+                    Process.Start(applicationPath);
+
+                    // Завершаем текущее приложение
+                    Application.Current.Shutdown();
+
+                    // Очищаем токен при выходе из аккаунта
+                    authService.ClearToken();
                 }
-            }           
+            }
         }
+
         private void ChangeNickname_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ChangeNickname());
@@ -61,9 +68,7 @@ namespace Messenger
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.Show();
-            Application.Current.MainWindow.Close();
+           Window.GetWindow(this).Close(); // Закрыть текущее окно
         }
     }
 }

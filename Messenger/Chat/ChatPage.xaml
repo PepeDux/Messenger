@@ -9,7 +9,14 @@
       Title="ChatPage">
 
     <Grid>
-        <TextBox x:Name="Chat" IsReadOnly="True" Margin="40,40,40,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="350" FontSize="20" AcceptsTab="True" AcceptsReturn="True"/>
-        <TextBox x:Name="Message" Margin="40,0,40,40" TextWrapping="Wrap" Height="50" FontSize="20" VerticalAlignment="Bottom" KeyDown="Message_KeyDown"/>
+        <ScrollViewer x:Name="ChatScrollViewer" Margin="40,40,40,0" VerticalAlignment="Top" Height="350" VerticalScrollBarVisibility="Hidden" Background="#FF27232A" BorderBrush="#FF27232A">
+            <StackPanel x:Name="ChatStackPanel" VerticalAlignment="Bottom">
+                <!-- Сообщения будут добавляться сюда -->
+            </StackPanel>
+        </ScrollViewer>
+        <TextBox x:Name="Message" Margin="40,0,92,40" TextWrapping="Wrap" Height="50" FontSize="20" VerticalAlignment="Bottom" KeyDown="Message_KeyDown" TextChanged="Message_TextChanged"/>
+        <Button Content="Enter" HorizontalAlignment="Left" Margin="513,415,0,0" VerticalAlignment="Top" Click="Enter_Click"/>
     </Grid>
 </Page>
+    
+    

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Messenger.DB;
+using System.Diagnostics;
 
 namespace Messenger
 {
@@ -22,6 +23,7 @@ namespace Messenger
     public partial class ChangeNickname : Page
     {
         bool succsess = true;
+
         public ChangeNickname()
         {
             InitializeComponent();
@@ -34,43 +36,48 @@ namespace Messenger
 
         private void Change_Click(object sender, RoutedEventArgs e)
         {
-            if(NewNickname.Text == DataBank.UserLog)
+            string newNickname = NewNickname.Text;
+
+            // Сбрасываем флаги успеха
+            succsess = true;
+
+            if (newNickname == DataBank.UserLog)
             {
                 NewNickname.Text = null;
                 Name.Content = "NEW NICKNAME - nicknames are the same";
                 Name.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
                 succsess = false;
             }
-         
-            using (var db = new ApplicationContext())
+
+            if (succsess)
             {
-                var users = db.Users.ToList();
-
-                foreach (Users u in users)
+                using (var db = new ApplicationContext())
                 {
-                    if(succsess == true)
+                    var currentUser = db.Users.FirstOrDefault(u => u.Nickname == DataBank.UserLog);
+
+                    if (currentUser != null)
                     {
-                        if (NewNickname.Text != u.Nickname && DataBank.UserLog == u.Nickname)
-                        {
-                            Users u1 = db.Users.FirstOrDefault();
+                        currentUser.Nickname = newNickname;
+                        DataBank.UserLog = newNickname;
+                        db.SaveChanges(); // сохраняем изменения
 
-                            u1.Nickname = NewNickname.Text;
-                            DataBank.UserLog = NewNickname.Text;
-                            db.SaveChanges();   // сохраняем изменения
-
-                            NavigationService.Navigate(new Settings());
-                        }
-                        else
-                        {
-                            NewNickname.Text = null;
-                            Name.Content = "NEW NICKNAME - nickname already taken";
-                            Name.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
-                            succsess = false;
-                        }
+                        // Перезапуск приложения
+                        RestartApplication();
                     }
-                    
                 }
             }
+        }
+
+        private void RestartApplication()
+        {
+            // Получаем путь к текущему исполняемому файлу
+            string applicationPath = Process.GetCurrentProcess().MainModule.FileName;
+
+            // Запускаем новое экземпляр текущего приложения
+            Process.Start(applicationPath);
+
+            // Завершаем текущее приложение
+            Application.Current.Shutdown();
         }
     }
 }

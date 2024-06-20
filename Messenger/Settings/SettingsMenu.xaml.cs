@@ -24,6 +24,15 @@ namespace Messenger
             InitializeComponent();
         }
 
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Перемещает окно при зажатии левой кнопки мыши
+            if (e.ButtonState == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
         private void SettingsFrame_Initialized(object sender, EventArgs e)
         {
             SettingsFrame.Content = new Settings();

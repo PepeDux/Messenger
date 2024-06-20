@@ -25,10 +25,9 @@ namespace Messenger
         {
             InitializeComponent();
         }
-        
+
         private void OpenCreateChat_Click(object sender, RoutedEventArgs e)
         {
-
             NavigationService.Navigate(new CreateChat());
         }
 
@@ -38,36 +37,44 @@ namespace Messenger
             {
                 var chatrooms = db.ChatRooms.ToList();
 
-                foreach (ChatRooms cr in chatrooms)
+                foreach (var cr in chatrooms)
                 {
                     if (OpenChatLogin.Text == cr.Login && OpenChatPassword.Password == cr.Password)
                     {
-                        DataBank.RoomID = cr.RoomID;    //Указываем программе текущий чат
+                        DataBank.RoomID = cr.RoomID;
 
-                        OpenChatLogin.Text = null;        //Очищаем значения полей
-                        OpenChatPassword.Password = null; //
+                        OpenChatLogin.Text = null;
+                        OpenChatPassword.Password = null;
 
-                        MainMenu mainMenu = new MainMenu();
-                        mainMenu.Show();
-                        Application.Current.MainWindow.Close();
+                        MainMenu mainMenu = Application.Current.Windows.OfType<MainMenu>().FirstOrDefault();
+                        if (mainMenu == null)
+                        {
+                            mainMenu = new MainMenu();
+                            mainMenu.Show();
+                            Application.Current.MainWindow.Close();
+                            Application.Current.MainWindow = mainMenu;
+                        }
+                        mainMenu.UpdateChatList(cr.RoomID);
+                        mainMenu.RefreshChatList(); // Обновляем список чатов
+                        Window.GetWindow(this).Close();
+
+                        return;
                     }
-
                 }
+
                 Password.Content = "PASSWORD - wrong chat name or password";
                 Password.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
 
                 Chat.Content = "CHAT NAME - wrong chat name or password";
                 Chat.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#C22F1F");
 
-                OpenChatPassword.Password = null;//Очищаем поля авторизации
+                OpenChatPassword.Password = null;
             }
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.Show();
-            Application.Current.MainWindow.Close();
+            Window.GetWindow(this).Close(); // Закрыть текущее окно
         }
     }
 }

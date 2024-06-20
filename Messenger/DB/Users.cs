@@ -15,7 +15,6 @@ namespace Messenger.DB
         public string Nickname { get; set; }
         public string Password { get; set; }
         public string? IP { get; set; }
-
-
+        public string AuthToken { get; set; }
     }
 }
