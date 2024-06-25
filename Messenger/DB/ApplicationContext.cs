@@ -20,7 +20,7 @@ namespace Messenger.DB
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=ms-sql-10.in-solve.ru;Initial Catalog=1gb_mesenger;User ID=1gb_vudu;Password=z5c357c6uiw;Trust Server Certificate=True");
+            optionsBuilder.UseSqlServer(@"Строка подключения");
         }
     }
 }
